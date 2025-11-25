@@ -8,6 +8,8 @@ It is very time-consuming.
 
 == Day 01 ==
 
+-- Chapter 01 -- 
+
 ### Selenium WebDriver Simplified Architecture
 
 This diagram illustrates the core flow of how your Selenium script interacts with a web browser.
@@ -47,9 +49,9 @@ commands that the browser understands.
 executable and performs the actions (navigating, clicking, typing). It then sends a response back through 
 the driver.
 
+-----------------------------------------------------------------------------------------------------------------------
 
-
-
+-- Chapter 02 -- 
 
 
 

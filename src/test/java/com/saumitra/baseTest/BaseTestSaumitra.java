@@ -3,6 +3,7 @@ package com.saumitra.baseTest;
 import com.saumitra.base.CommonPageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import com.saumitra.utlis.SetDriverUtility;
@@ -28,6 +29,11 @@ public class BaseTestSaumitra {
     @BeforeTest(dependsOnMethods = {"setUp"})
     public void loadApplication() {
         driver.get(googleURL);
+    }
+
+    @AfterTest
+    public void tearDown() {
+        driver.quit();
     }
 
 }

@@ -1,39 +1,32 @@
 package com.saumitra.baseTest;
 
-import com.saumitra.base.CommonPageObject;
+import com.saumitra.utlis.GetUtility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import com.saumitra.utlis.SetDriverUtility;
-import org.testng.annotations.BeforeTest;
-
-import static com.saumitra.utlis.SetDriverUtility.setDriverUtility;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.testng.annotations.*;
 
 public class BaseTestSaumitra {
 
-
-    private WebDriver driver;
-    private String googleURL = "https://www.google.com/";
+    protected WebDriver driver;
+    protected GetUtility getUtility;
 
     @BeforeTest
     public void setUp() {
-        driver = new ChromeDriver();
         driver.manage().window().maximize();
-        CommonPageObject pageObject = new CommonPageObject();
-        pageObject.setDriver(driver);
-        setDriverUtility();
-    }
 
-    @BeforeTest(dependsOnMethods = {"setUp"})
-    public void loadApplication() {
-        driver.get(googleURL);
+        // Initialize utility with driver
+        getUtility = new GetUtility(driver);
+
+        // Load application
+        driver.get();
     }
 
     @AfterTest
     public void tearDown() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
-
 }

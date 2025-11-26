@@ -6,32 +6,29 @@ import org.openqa.selenium.WebElement;
 
 public class CommonPageObject {
 
-    public static WebDriver driver;
+    // Make it protected, not static - each test should have its own driver
+    protected WebDriver driver;
 
-    // Basically the idea here is to allow child classed to access this Driver and set the driver
-    public void setDriver(WebDriver driver) {
-
-        CommonPageObject.driver = driver;
+    // Constructor to set driver
+    public CommonPageObject(WebDriver driver) {
+        this.driver = driver;
     }
 
-    // Now we also need to allow the Child classes to set their elements
-    public static WebElement find(By locator) {
-
+    // Instance methods (not static)
+    public WebElement find(By locator) {
         return driver.findElement(locator);
     }
 
-    // Idea is the same as above
-    public static void set(By locator, String text) {
+    public void set(By locator, String text) {
         find(locator).clear();
-        find(locator).sendKeys(text); // Here we are allowing the child classes to set their locators properly
+        find(locator).sendKeys(text);
     }
 
-    public static void click(By locator) {
+    public void click(By locator) {
         find(locator).click();
     }
 
-
-    public static void delay(int milliseconds) {
+    public void delay(int milliseconds) {
         try {
             Thread.sleep(milliseconds);
         } catch (InterruptedException exception) {

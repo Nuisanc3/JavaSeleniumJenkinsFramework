@@ -1,29 +1,30 @@
 package com.saumitra.utlis;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.time.Duration;
 
 public class SetDriverUtility {
 
+    // WARNING: This static variable approach is NOT safe for parallel execution.
     private static WebDriver driver;
 
-    // Set the driver instance
-    public static void setDriver(WebDriver driverInstance) {
-        if (driverInstance == null) {
-            throw new IllegalArgumentException("Driver instance cannot be null");
-        }
-        driver = driverInstance;
+    public static void setDriver() {
+        // Initialize the WebDriver
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    // Get the driver instance
     public static WebDriver getDriver() {
-        if (driver == null) {
-            throw new IllegalStateException("Driver not initialized. Call setDriver() first.");
-        }
+        // Returns the single static instance
         return driver;
     }
 
-    // Optional: Clear driver after test completion
-    public static void removeDriver() {
-        driver = null;
+    public static void quitDriver() {
+        if (driver != null) {
+            driver.quit();
+            driver = null; // Set it back to null after quitting
+        }
     }
 }
